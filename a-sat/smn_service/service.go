@@ -46,8 +46,8 @@ func ResourceReq(c *gin.Context) { //TODO: Change input data 'data' to appropria
 	*/
 	log.Print("##############################\n")
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -56,7 +56,7 @@ func ResourceReq(c *gin.Context) { //TODO: Change input data 'data' to appropria
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -69,11 +69,11 @@ func ResourceReq(c *gin.Context) { //TODO: Change input data 'data' to appropria
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
@@ -88,8 +88,8 @@ func ResourceResp(c *gin.Context) { //TODO: Change input data 'data' to appropri
 	log.Print("8. Session Response\n")
 	log.Print("##############################\n")
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -98,7 +98,7 @@ func ResourceResp(c *gin.Context) { //TODO: Change input data 'data' to appropri
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -111,23 +111,21 @@ func ResourceResp(c *gin.Context) { //TODO: Change input data 'data' to appropri
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
 
 func SessionReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
 	reqBody := map[string]interface{}{}
-	// log.Println(reqBody)
-	// replyto, _ := json.Marshal(reqBody)
-	// reqData := []byte(`{ "nfService":"training-requseted"}`)
+
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -136,7 +134,7 @@ func SessionReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -157,11 +155,11 @@ func SessionReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
@@ -180,8 +178,8 @@ func PagingReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -190,7 +188,7 @@ func PagingReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -203,11 +201,11 @@ func PagingReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
@@ -226,8 +224,8 @@ func IntraHOReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -236,7 +234,7 @@ func IntraHOReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -249,11 +247,11 @@ func IntraHOReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
@@ -272,8 +270,8 @@ func IntraHOStateExchangeReq(c *gin.Context) { //TODO: Change input data 'data' 
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -282,7 +280,7 @@ func IntraHOStateExchangeReq(c *gin.Context) { //TODO: Change input data 'data' 
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -296,11 +294,11 @@ func IntraHOStateExchangeReq(c *gin.Context) { //TODO: Change input data 'data' 
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
@@ -345,8 +343,8 @@ func InterHOReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -355,7 +353,7 @@ func InterHOReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -368,11 +366,11 @@ func InterHOReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
@@ -388,8 +386,8 @@ func InterHOStateExchageReq(c *gin.Context) { //TODO: Change input data 'data' t
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -398,7 +396,7 @@ func InterHOStateExchageReq(c *gin.Context) { //TODO: Change input data 'data' t
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -412,11 +410,11 @@ func InterHOStateExchageReq(c *gin.Context) { //TODO: Change input data 'data' t
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }

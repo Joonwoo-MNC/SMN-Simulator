@@ -33,24 +33,21 @@ type ResponseInfo struct {
 	data            string `json:"data"`
 }
 
-func NotificationData(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
+func ResourceReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
 	reqBody := map[string]interface{}{}
 
+	log.Print("##############################\n")
+	log.Print("7. Resource Allocation Process\n")
 	/*
-		Add Propatation Delay
+		Add Resource Allocation Code
 	*/
 	log.Print("##############################\n")
-	log.Print("5. Notification with Data Transfer Process\n")
-	/*
-		Add Table Update Code
-	*/
 	log.Print("##############################\n")
-
-	
-
+	log.Print("8. Session Response\n")
+	log.Print("##############################\n")
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -59,7 +56,7 @@ func NotificationData(c *gin.Context) { //TODO: Change input data 'data' to appr
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -68,63 +65,52 @@ func NotificationData(c *gin.Context) { //TODO: Change input data 'data' to appr
 		ForceAttemptHTTP2: false,
 	}
 	http := &http.Client{Transport: transport}
-	resp, err := http.Post("http://localhost:24247/smn-service/v1/NotificationData", "application/json", bytes.NewBuffer([]byte(jsonStr)))
+	resp, err := http.Post("http://localhost:24246/smn-service/v1/ResourceResp", "application/json", bytes.NewBuffer([]byte(jsonStr)))
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
 
-func InterLocationUpdate(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
-	reqBody := map[string]interface{}{}
+func SessionReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
+	jsonBody := map[string]interface{}{}
+	log.Print("##############################\n")
+	log.Print("1. Session Request\n")
+	log.Print("##############################\n")
+	jsonBody["reqNFInstanceID"] = "UE-triggered Session Establishment"
+	jsonBody["nfService"] = "smn"
+	now_t := time.Now().Format("2006-01-02 15:04:05")
+	jsonBody["reqTime"] = now_t
+	jsonBody["data"] = "none"
+	jsonStr, _ := json.Marshal(jsonBody)
+	//print("reqNFInstanceID: %s", reqNfInstanceId)
+	resp, err := http.Post("http://localhost:24246/smn-service/v1/SessionReq", "application/json", bytes.NewBuffer([]byte(jsonStr)))
+	if err != nil {
+		fmt.Println("error: %v", err)
+	} else {
+		//fmt.Println(resp.Header)
+		respBody, _ := ioutil.ReadAll(resp.Body)
+		jsonData := map[string]interface{}{}
+		json.Unmarshal(respBody, &jsonData)
+		//fmt.Println(jsonData)
+	}
+}
 
+func PagingReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
+
+	log.Print("##############################\n")
+	log.Print("7. Paging Process\n")
 	/*
-		Add Propagation Delay
+		Add Paging Code
 	*/
 	log.Print("##############################\n")
-	log.Print("8. Location Update Request\n")
-	log.Print("##############################\n")
-
-	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
-		"reqTime":       reqBody["reqTime"],
-		"data":          "finished",
-	})
-
-	// c.BindJSON(&replyto)
-
-	jsonBody := map[string]interface{}{}
-	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
-	now_t := time.Now().Format("2006-01-02 15:04:05")
-	jsonBody["reqTime"] = now_t
-	jsonBody["data"] = "None"
-	jsonStr, _ := json.Marshal(jsonBody)
-	transport := &http.Transport{
-		ForceAttemptHTTP2: false,
-	}
-	http := &http.Client{Transport: transport}
-
-	resp, err := http.Post("http://127.0.0.18:8000/smn-service/v1/InterLocationUpdate", "application/json", bytes.NewBuffer([]byte(jsonStr)))
-	if err != nil {
-		fmt.Println("error: %v", err)
-	} else {
-		fmt.Println(resp.Header)
-		respBody, _ := ioutil.ReadAll(resp.Body)
-		jsonData := map[string]interface{}{}
-		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
-	}
-	return
 }
-
 
 func AddService(engine *gin.Engine) *gin.RouterGroup {
 	group := engine.Group("/smn-service/v1")
@@ -161,16 +147,21 @@ var routes = Routes{
 	{
 		"smn-service",
 		strings.ToUpper("Post"),
-		"/NotificationData",
-		NotificationData,
+		"/SessionReq",
+		SessionReq,
 	},
-	
-		{
+
+	{
 		"smn-service",
 		strings.ToUpper("Post"),
-		"/InterLocationUpdate",
-		InterLocationUpdate,
+		"/ResourceReq",
+		ResourceReq,
 	},
-	
-	
+
+	{
+		"smn-service",
+		strings.ToUpper("Post"),
+		"/PagingReq",
+		PagingReq,
+	},
 }

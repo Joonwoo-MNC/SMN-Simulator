@@ -52,8 +52,8 @@ func SessionReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -62,7 +62,7 @@ func SessionReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -75,11 +75,11 @@ func SessionReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 
 	}
 	return
@@ -99,8 +99,8 @@ func TableUpdate(c *gin.Context) { //TODO: Change input data 'data' to appropria
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -109,7 +109,7 @@ func TableUpdate(c *gin.Context) { //TODO: Change input data 'data' to appropria
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -122,11 +122,11 @@ func TableUpdate(c *gin.Context) { //TODO: Change input data 'data' to appropria
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 
 	}
 	return
@@ -143,8 +143,8 @@ func NotificationData(c *gin.Context) { //TODO: Change input data 'data' to appr
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -153,7 +153,7 @@ func NotificationData(c *gin.Context) { //TODO: Change input data 'data' to appr
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -167,11 +167,11 @@ func NotificationData(c *gin.Context) { //TODO: Change input data 'data' to appr
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }

@@ -12,7 +12,7 @@ import (
 func UESession(reqNfInstanceId string) { //TODO: Change input data 'data' to appropriate attribute
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = reqNfInstanceId
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "none"
@@ -22,11 +22,11 @@ func UESession(reqNfInstanceId string) { //TODO: Change input data 'data' to app
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 
 }
@@ -34,7 +34,7 @@ func UESession(reqNfInstanceId string) { //TODO: Change input data 'data' to app
 func NWSession(reqNfInstanceId string) { //TODO: Change input data 'data' to appropriate attribute
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = reqNfInstanceId
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "none"
@@ -44,11 +44,11 @@ func NWSession(reqNfInstanceId string) { //TODO: Change input data 'data' to app
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 
 }
@@ -57,7 +57,7 @@ func NWSession(reqNfInstanceId string) { //TODO: Change input data 'data' to app
 func IntraHO(reqNfInstanceId string) { //TODO: Change input data 'data' to appropriate attribute
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = reqNfInstanceId
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "none"
@@ -68,11 +68,11 @@ func IntraHO(reqNfInstanceId string) { //TODO: Change input data 'data' to appro
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	
 	resp1, err1 := http.Post("http://localhost:24249/smn-service/v1/IntraHOReq", "application/json", bytes.NewBuffer([]byte(jsonStr)))
@@ -80,11 +80,11 @@ func IntraHO(reqNfInstanceId string) { //TODO: Change input data 'data' to appro
 	if err1 != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp1.Header)
+		//fmt.Println(resp1.Header)
 		respBody, _ := ioutil.ReadAll(resp1.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 
 }
@@ -92,7 +92,7 @@ func IntraHO(reqNfInstanceId string) { //TODO: Change input data 'data' to appro
 func InterHO(reqNfInstanceId string) { //TODO: Change input data 'data' to appropriate attribute
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = reqNfInstanceId
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "none"
@@ -103,11 +103,11 @@ func InterHO(reqNfInstanceId string) { //TODO: Change input data 'data' to appro
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	
 	resp1, err1 := http.Post("http://localhost:24249/smn-service/v1/InterHOReq", "application/json", bytes.NewBuffer([]byte(jsonStr)))
@@ -115,11 +115,11 @@ func InterHO(reqNfInstanceId string) { //TODO: Change input data 'data' to appro
 	if err1 != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp1.Header)
+		//fmt.Println(resp1.Header)
 		respBody, _ := ioutil.ReadAll(resp1.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 
 }

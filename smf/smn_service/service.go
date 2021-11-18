@@ -33,22 +33,18 @@ type ResponseInfo struct {
 	data            string `json:"data"`
 }
 
-
-
 func NoticeData(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
 	reqBody := map[string]interface{}{}
 	log.Print("##############################\n")
 	log.Print("2. Data Notification\n")
 	log.Print("##############################\n")
-		log.Print("##############################\n")
+	log.Print("##############################\n")
 	log.Print("2. Data Notification Response\n")
 	log.Print("##############################\n")
-	// log.Println(reqBody)
-	// replyto, _ := json.Marshal(reqBody)
-	// reqData := []byte(`{ "nfService":"training-requseted"}`)
+
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -57,7 +53,7 @@ func NoticeData(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -67,80 +63,75 @@ func NoticeData(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 	}
 	http := &http.Client{Transport: transport}
 	resp, err := http.Post("http://localhost:24249/smn-service/v1/NoticeDataResp", "application/json", bytes.NewBuffer([]byte(jsonStr)))
-	
+
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
-	
-	
+
 	log.Print("##############################\n")
 	log.Print("3. Subscription Exchange Process\n")
 	/*
-	Add Subscription Exchange Code
+		Add Subscription Exchange Code
 	*/
-	
+
 	log.Print("##############################\n")
 	resp1, err1 := http.Post("http://127.0.0.3:8000/smn-service/v1/SubscriptionExchange", "application/json", bytes.NewBuffer([]byte(jsonStr)))
 
 	if err1 != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp1.Header)
+		//fmt.Println(resp1.Header)
 		respBody, _ := ioutil.ReadAll(resp1.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 
 	log.Print("##############################\n")
 	log.Print("4. Data Transfer Process\n")
 	/*
-	Add Data Transfer Code
+		Add Data Transfer Code
 	*/
-	
+
 	log.Print("##############################\n")
 	resp2, err2 := http.Post("http://localhost:24249/smn-service/v1/DataTransfer", "application/json", bytes.NewBuffer([]byte(jsonStr)))
-
 
 	if err2 != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp2.Header)
+		//fmt.Println(resp2.Header)
 		respBody, _ := ioutil.ReadAll(resp2.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
-	
+
 	log.Print("##############################\n")
 	log.Print("5. Notification with Data Transfer\n")
 	/*
-	Add Notification with Data Transfer Code
+		Add Notification with Data Transfer Code
 	*/
 	log.Print("##############################\n")
 	resp3, err3 := http.Post("http://localhost:24248/smn-service/v1/NotificationData", "application/json", bytes.NewBuffer([]byte(jsonStr)))
 
-
 	if err3 != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp3.Header)
+		//fmt.Println(resp3.Header)
 		respBody, _ := ioutil.ReadAll(resp3.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
-
 
 	return
 }
-
 
 func AddService(engine *gin.Engine) *gin.RouterGroup {
 	group := engine.Group("/smn-service/v1")

@@ -33,7 +33,6 @@ type ResponseInfo struct {
 	data            string `json:"data"`
 }
 
-
 func InterLocationUpdate(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
 	reqBody := map[string]interface{}{}
 
@@ -42,8 +41,8 @@ func InterLocationUpdate(c *gin.Context) { //TODO: Change input data 'data' to a
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -52,7 +51,7 @@ func InterLocationUpdate(c *gin.Context) { //TODO: Change input data 'data' to a
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -66,15 +65,14 @@ func InterLocationUpdate(c *gin.Context) { //TODO: Change input data 'data' to a
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
-
 
 func AddService(engine *gin.Engine) *gin.RouterGroup {
 	group := engine.Group("/smn-service/v1")
@@ -108,7 +106,6 @@ var routes = Routes{
 		Index,
 	},
 
-	
 	{
 		"smn-service",
 		strings.ToUpper("Post"),

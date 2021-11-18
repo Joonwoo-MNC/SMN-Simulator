@@ -1,4 +1,4 @@
-package samf_service
+package smn_service
 
 import (
 	"bytes"
@@ -33,32 +33,26 @@ type ResponseInfo struct {
 	data            string `json:"data"`
 }
 
-func InterHOReport(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
-
-	log.Print("##############################\n")
-	log.Print("2. Report RAN Usage Data\n")
-	log.Print("##############################\n")
-}
-
-func InterReReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
+func TableUpdate(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
 	reqBody := map[string]interface{}{}
 
-	log.Print("##############################\n")
-	log.Print("4. Admission Control Process\n")
 	/*
-		Add Admission Control Code
+		Add Propatation Delay
 	*/
 	log.Print("##############################\n")
-	log.Print("##############################\n")
-	log.Print("5. State Exchange Process\n")
+	log.Print("4. Table Update Process\n")
 	/*
-		Add State Exchange Code
+		Add Table Update Code
 	*/
+	log.Print("##############################\n")
+
+	log.Print("##############################\n")
+	log.Print("4. Table Update Response\n")
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -67,7 +61,7 @@ func InterReReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -76,30 +70,35 @@ func InterReReq(c *gin.Context) { //TODO: Change input data 'data' to appropriat
 		ForceAttemptHTTP2: false,
 	}
 	http := &http.Client{Transport: transport}
-
-	resp, err := http.Post("http://localhost:24249/smn-service/v1/InterHOStateExchageReq", "application/json", bytes.NewBuffer([]byte(jsonStr)))
+	resp, err := http.Post("http://localhost:24244/smn-service/v1/TableUpdate", "application/json", bytes.NewBuffer([]byte(jsonStr)))
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
 
-func InterHOStateExchageResp(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
+func NotificationData(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
 	reqBody := map[string]interface{}{}
 
+	/*
+		Add Propatation Delay
+	*/
 	log.Print("##############################\n")
-	log.Print("6. Registration Response\n")
+	log.Print("5. Notification with Data Transfer Process\n")
+	/*
+		Add Table Update Code
+	*/
 	log.Print("##############################\n")
 
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -108,7 +107,7 @@ func InterHOStateExchageResp(c *gin.Context) { //TODO: Change input data 'data' 
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -117,33 +116,59 @@ func InterHOStateExchageResp(c *gin.Context) { //TODO: Change input data 'data' 
 		ForceAttemptHTTP2: false,
 	}
 	http := &http.Client{Transport: transport}
-
-	resp, err := http.Post("http://localhost:24249/smn-service/v1/InterReResp", "application/json", bytes.NewBuffer([]byte(jsonStr)))
+	resp, err := http.Post("http://localhost:24244/smn-service/v1/NotificationData", "application/json", bytes.NewBuffer([]byte(jsonStr)))
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
+	return
+}
 
+func InterLocationUpdate(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
+	reqBody := map[string]interface{}{}
+
+	/*
+		Add Propagation Delay
+	*/
 	log.Print("##############################\n")
 	log.Print("8. Location Update Request\n")
 	log.Print("##############################\n")
 
-	resp1, err1 := http.Post("http://localhost:24247/smn-service/v1/InterLocationUpdate", "application/json", bytes.NewBuffer([]byte(jsonStr)))
-	if err1 != nil {
-		fmt.Println("error: %v", err1)
+	c.JSON(http.StatusOK, gin.H{
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
+		"reqTime":       reqBody["reqTime"],
+		"data":          "finished",
+	})
+
+	// c.BindJSON(&replyto)
+
+	jsonBody := map[string]interface{}{}
+	jsonBody["reqNFInstanceID"] = "test"
+	jsonBody["nfService"] = "smn"
+	now_t := time.Now().Format("2006-01-02 15:04:05")
+	jsonBody["reqTime"] = now_t
+	jsonBody["data"] = "None"
+	jsonStr, _ := json.Marshal(jsonBody)
+	transport := &http.Transport{
+		ForceAttemptHTTP2: false,
+	}
+	http := &http.Client{Transport: transport}
+	resp, err := http.Post("http://localhost:24248/smn-service/v1/InterLocationUpdate", "application/json", bytes.NewBuffer([]byte(jsonStr)))
+	if err != nil {
+		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp1.Header)
-		respBody, _ := ioutil.ReadAll(resp1.Body)
+		//fmt.Println(resp.Header)
+		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
-
 	return
 }
 
@@ -182,21 +207,21 @@ var routes = Routes{
 	{
 		"smn-service",
 		strings.ToUpper("Post"),
-		"/InterHOReport",
-		InterHOReport,
+		"/TableUpdate",
+		TableUpdate,
 	},
 
 	{
 		"smn-service",
 		strings.ToUpper("Post"),
-		"/InterReReq",
-		InterReReq,
+		"/NotificationData",
+		NotificationData,
 	},
 
 	{
 		"smn-service",
 		strings.ToUpper("Post"),
-		"/InterHOStateExchageResp",
-		InterHOStateExchageResp,
+		"/InterLocationUpdate",
+		InterLocationUpdate,
 	},
 }

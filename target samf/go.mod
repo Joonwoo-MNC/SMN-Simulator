@@ -1,22 +1,22 @@
-module smn.com
+module samf.com
 
 go 1.14
 
-replace smn.com/logger => ../logger
+replace samf.com/logger => ../logger
 
-replace smn.com/service => ../service
+replace samf.com/service => ../service
 
-replace smn.com/factory => ../factory
+replace samf.com/factory => ../factory
 
-replace smn.com/util => ../util
+replace samf.com/util => ../util
 
-replace smn.com/consumer => ../consumer
+replace samf.com/consumer => ../consumer
 
-replace smn.com/context => ../context
+replace samf.com/context => ../context
 
-replace smn.com/mtlf => ../mtlf
+replace samf.com/mtlf => ../mtlf
 
-replace smn.com/anlf => ../AnLF
+replace samf.com/anlf => ../AnLF
 
 require (
 	github.com/antonfisher/nested-logrus-formatter v1.3.0

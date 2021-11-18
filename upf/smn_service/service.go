@@ -33,21 +33,19 @@ type ResponseInfo struct {
 	data            string `json:"data"`
 }
 
-func ResourceReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
+func Data(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
 	reqBody := map[string]interface{}{}
 
 	log.Print("##############################\n")
-	log.Print("7. Resource Allocation Process\n")
-	/*
-		Add Resource Allocation Code
-	*/
+	log.Print("1. Downlink Data \n")
 	log.Print("##############################\n")
 	log.Print("##############################\n")
-	log.Print("8. Session Response\n")
+	log.Print("2. Data Notification \n")
 	log.Print("##############################\n")
+
 	c.JSON(http.StatusOK, gin.H{
-		"nfService":     "test-nwdaf",
-		"reqNFInstance": "test-mtlf",
+		"nfService":     "smn",
+		"reqNFInstance": "test cp",
 		"reqTime":       reqBody["reqTime"],
 		"data":          "finished",
 	})
@@ -56,7 +54,7 @@ func ResourceReq(c *gin.Context) { //TODO: Change input data 'data' to appropria
 
 	jsonBody := map[string]interface{}{}
 	jsonBody["reqNFInstanceID"] = "test"
-	jsonBody["nfService"] = "training"
+	jsonBody["nfService"] = "smn"
 	now_t := time.Now().Format("2006-01-02 15:04:05")
 	jsonBody["reqTime"] = now_t
 	jsonBody["data"] = "None"
@@ -65,51 +63,38 @@ func ResourceReq(c *gin.Context) { //TODO: Change input data 'data' to appropria
 		ForceAttemptHTTP2: false,
 	}
 	http := &http.Client{Transport: transport}
-	resp, err := http.Post("http://localhost:24246/smn-service/v1/ResourceResp", "application/json", bytes.NewBuffer([]byte(jsonStr)))
+	resp, err := http.Post("http://127.0.0.2:8000/smn-service/v1/NoticeData", "application/json", bytes.NewBuffer([]byte(jsonStr)))
 	if err != nil {
 		fmt.Println("error: %v", err)
 	} else {
-		fmt.Println(resp.Header)
+		//fmt.Println(resp.Header)
 		respBody, _ := ioutil.ReadAll(resp.Body)
 		jsonData := map[string]interface{}{}
 		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
+		//fmt.Println(jsonData)
 	}
 	return
 }
 
-func SessionReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
-	jsonBody := map[string]interface{}{}
+func NoticeDataResp(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
+
 	log.Print("##############################\n")
-	log.Print("1. Session Request\n")
+	log.Print("2. Data Notification Response\n")
 	log.Print("##############################\n")
-	jsonBody["reqNFInstanceID"] = "UE-triggered Session Establishment"
-	jsonBody["nfService"] = "training"
-	now_t := time.Now().Format("2006-01-02 15:04:05")
-	jsonBody["reqTime"] = now_t
-	jsonBody["data"] = "none"
-	jsonStr, _ := json.Marshal(jsonBody)
-	//print("reqNFInstanceID: %s", reqNfInstanceId)
-	resp, err := http.Post("http://localhost:24246/smn-service/v1/SessionReq", "application/json", bytes.NewBuffer([]byte(jsonStr)))
-	if err != nil {
-		fmt.Println("error: %v", err)
-	} else {
-		fmt.Println(resp.Header)
-		respBody, _ := ioutil.ReadAll(resp.Body)
-		jsonData := map[string]interface{}{}
-		json.Unmarshal(respBody, &jsonData)
-		fmt.Println(jsonData)
-	}
+
+	return
 }
 
-func PagingReq(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
+func DataTransfer(c *gin.Context) { //TODO: Change input data 'data' to appropriate attribute
 
 	log.Print("##############################\n")
-	log.Print("7. Paging Process\n")
+	log.Print("4. Data Transfer Process\n")
 	/*
-		Add Paging Code
+		Add Data Transfer Code
 	*/
 	log.Print("##############################\n")
+
+	return
 }
 
 func AddService(engine *gin.Engine) *gin.RouterGroup {
@@ -147,21 +132,21 @@ var routes = Routes{
 	{
 		"smn-service",
 		strings.ToUpper("Post"),
-		"/SessionReq",
-		SessionReq,
+		"/Data",
+		Data,
 	},
 
 	{
 		"smn-service",
 		strings.ToUpper("Post"),
-		"/ResourceReq",
-		ResourceReq,
+		"/NoticeDataResp",
+		NoticeDataResp,
 	},
 
 	{
 		"smn-service",
 		strings.ToUpper("Post"),
-		"/PagingReq",
-		PagingReq,
+		"/DataTransfer",
+		DataTransfer,
 	},
 }
